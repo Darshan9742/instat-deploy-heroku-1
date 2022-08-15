@@ -1,8 +1,6 @@
 import email
 from pickle import NONE
 import profile
-from re import template
-from winsound import PlaySound
 from django.shortcuts import render, redirect
 from accounts.decorators import unauthenticated_user
 from .models import Project

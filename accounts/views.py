@@ -1,6 +1,6 @@
-import email
+# import email
 from pickle import NONE
-import profile
+# import profile
 from django.shortcuts import render, redirect
 from accounts.decorators import unauthenticated_user
 from .models import Project
@@ -27,24 +27,24 @@ def registerPage(request):
         if form.is_valid():
             form.save()
 
-            fname = form.cleaned_data.get('first_name')
-            lname = form.cleaned_data.get('last_name')
-            full_name = fname + lname 
-            reg_email = form.cleaned_data.get('email')
-            reg_username = form.cleaned_data.get('username')
-            messages.success(request, 'Account created. Welcome, ' + fname + '!')
+            # fname = form.cleaned_data.get('first_name')
+            # lname = form.cleaned_data.get('last_name')
+            # full_name = fname + lname 
+            # reg_email = form.cleaned_data.get('email')
+            # reg_username = form.cleaned_data.get('username')
+            # messages.success(request, 'Account created. Welcome, ' + fname + '!')
 
-            # send mail to confirm the user of his successful registration
-            template = render_to_string('accounts/onboard.html', {'fname':fname, 'reg_email':reg_email, 'reg_username':reg_username, 'full_name':full_name})
+            # # send mail to confirm the user of his successful registration
+            # template = render_to_string('accounts/onboard.html', {'fname':fname, 'reg_email':reg_email, 'reg_username':reg_username, 'full_name':full_name})
             
-            email = EmailMessage(
-                'Welcome aboard' + ' ' + fname + '!',
-                template,
-                settings.EMAIL_HOST_USER,
-                [reg_email],
-            )
-            email.fail_silently = False
-            email.send()
+            # email = EmailMessage(
+            #     'Welcome aboard' + ' ' + fname + '!',
+            #     template,
+            #     settings.EMAIL_HOST_USER,
+            #     [reg_email],
+            # )
+            # email.fail_silently = False
+            # email.send()
             return redirect('login')
 
     context = {'form': form}
@@ -108,19 +108,19 @@ def addProject(request):
         if form.is_valid():
             form.save()
 
-            pname = form.cleaned_data.get('project_name')
-            c_email = form.cleaned_data.get('client_mail')
-            template = render_to_string('accounts/client_email.html', {'pname':pname, 'c_email':c_email})
+            # pname = form.cleaned_data.get('project_name')
+            # c_email = form.cleaned_data.get('client_mail')
+            # template = render_to_string('accounts/client_email.html', {'pname':pname, 'c_email':c_email})
 
-            email = EmailMessage(
-                'Your project' + ' ' + pname + ' ' + ' is initiated!',
-                template,
-                # 'http://127.0.0.1:8000/status/' + id,
-                settings.EMAIL_HOST_USER,
-                [c_email]
-            )
-            email.fail_silently = False
-            email.send()
+            # email = EmailMessage(
+            #     'Your project' + ' ' + pname + ' ' + ' is initiated!',
+            #     template,
+            #     # 'http://127.0.0.1:8000/status/' + id,
+            #     settings.EMAIL_HOST_USER,
+            #     [c_email]
+            # )
+            # email.fail_silently = False
+            # email.send()
             # return redirect('/dashboard')
 
             return render(request, 'messages/projectAdded.html')
